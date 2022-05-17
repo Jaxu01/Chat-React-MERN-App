@@ -13,10 +13,10 @@ const ObjectId = require("mongodb").ObjectId;
 
 
 // This section will help you get a list of all the records.
-recordRoutes.route("/record").get(function (req, res) {
+recordRoutes.route("/messages").get(function (req, res) {
   let db_connect = dbo.getDb("ChatApp");
   db_connect
-    .collection("records")
+    .collection("Messages")
     .find({})
     .toArray(function (err, result) {
       if (err) throw err;
@@ -41,8 +41,7 @@ recordRoutes.route("/action/add").post(function (req, response) {
   let db_connect = dbo.getDb();
   let myobj = {
     name: req.body.name,
-    position: req.body.position,
-    level: req.body.level,
+    message: req.body.message,
   };
   db_connect.collection("Messages").insertOne(myobj, function (err, res) {
     if (err) throw err;
