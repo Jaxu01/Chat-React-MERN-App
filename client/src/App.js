@@ -14,7 +14,7 @@ function App() {
   const jsonDate = date.toJSON();
 
   function setNewName() {
-    askForName()
+    askForName();
   }
 
   function askForName() {
@@ -30,7 +30,7 @@ function App() {
   
   function getName() {
     if (!localStorage.name) {
-      askForName()
+      askForName();
     }
     else {
       setName(localStorage.name);
@@ -38,7 +38,7 @@ function App() {
   }
 
   function handleMessageChange(e) {
-    setMessage(e.target.value)
+    setMessage(e.target.value);
   }
   
   async function getMessages() {
@@ -57,24 +57,24 @@ function App() {
   useEffect(() => {
     getName();
     getMessages();
-    console.log(messagesEndRef)
-    messagesEndRef.current.scrollIntoView()
+    console.log(messagesEndRef);
+    messagesEndRef.current.scrollIntoView();
     return;
   }, [messages.length]);
   
   
   async function sendMessage(event) {
-    event.preventDefault()
+    event.preventDefault();
     event.target.checkValidity();
-    console.log(name, message, date)
-    const newMessage = {name, message, date}
+    console.log(name, message, date);
+    const newMessage = {name, message, date};
     
     await fetch(`${CDN_URL}/action/add`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(newMessage)
+      body: JSON.stringify(newMessage),
     })
     .catch(error => {
       return window.alert(error);
@@ -95,7 +95,7 @@ function App() {
       </nav>
       <section className="MessageBox">
       {messages.map((item) => (
-      <div key={item._id} className={`message-container ${item.name==="Jakub"?"primary" : ""}`}>
+      <div key={item._id} className={`message-container ${item.name==="Jakub" ? "primary" : ""}`}>
         <section className="message-profile">
           {item?.name?.length ?item.name[0]:"?"}
         </section>
