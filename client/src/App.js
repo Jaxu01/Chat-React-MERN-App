@@ -2,6 +2,8 @@ import './App.css';
 import { useState, useEffect, useRef } from 'react';
 
 function App() {
+  const CDN_URL = 'http://localhost:5000';
+
   const [name, setName] = useState("");
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
@@ -18,8 +20,8 @@ function App() {
   function askForName() {
     let sign = window.prompt("Jak masz na imię?")
     if (sign.localStorage.name>4) {
-    localStorage.name = sign;
-    setName(sign);
+      localStorage.name = sign;
+      setName(sign);
     }
     else {
       alert("Imię jest zbyt krótkie");
@@ -40,7 +42,7 @@ function App() {
   }
   
   async function getMessages() {
-    const response = await fetch(`http://localhost:5000/messages`);
+    const response = await fetch(`${CDN_URL}/messages`);
     
     if (!response.ok) {
       const message = `An error occurred ${response.statusText}`;
@@ -67,7 +69,7 @@ function App() {
     console.log(name, message, date)
     const newMessage = {name, message, date}
     
-    await fetch("http://localhost:5000/action/add", {
+    await fetch(`${CDN_URL}/action/add`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
