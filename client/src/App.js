@@ -17,9 +17,9 @@ function App() {
 
   function askForName() {
     let sign = window.prompt("Jak masz na imię?")
-    if (sign.length>4) {
-      localStorage.name = sign;
-      setName(sign);
+    if (sign.localStorage.name>4) {
+    localStorage.name = sign;
+    setName(sign);
     }
     else {
       alert("Imię jest zbyt krótkie");
@@ -27,12 +27,12 @@ function App() {
   }
   
   function getName() {
-    if (!localStorage.name.length) {
+    if (!localStorage.name) {
       askForName()
     }
-      else {
-        setName(localStorage.name);
-      }
+    else {
+      setName(localStorage.name);
+    }
   }
 
   function handleMessageChange(e) {
@@ -91,20 +91,20 @@ function App() {
           <li className="item button primary"><a href="Zarejestruj Się">Zarejestruj Się</a></li>
         </ul>
       </nav>
-      <div className="MessageBox">
+      <section className="MessageBox">
       {messages.map((item) => (
       <div key={item._id} className={`message-container ${item.name==="Jakub"?"primary" : ""}`}>
-        <div className="message-profile">
+        <section className="message-profile">
           {item?.name?.length ?item.name[0]:"?"}
-        </div>
-        <div className="message-bubble">
+        </section>
+        <section className="message-bubble">
           <h1>{item.name}</h1>
           <p>{item.message}</p>
-        </div>
+        </section>
       </div>
       ))}
       <div ref={messagesEndRef}></div>
-    </div>
+    </section>
       <form onSubmit={sendMessage} className="form" method="post">
         <input onChange={handleMessageChange} placeholder="Wiadomość..." type="text" value={message} name="message" required/>
         <button>Wyślij</button>
