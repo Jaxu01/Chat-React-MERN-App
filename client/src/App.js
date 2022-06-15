@@ -35,7 +35,7 @@ function App() {
       setName(sign)
     }
     else {
-      alert(lang['-name-too-short'])
+      alert(lang['name-too-short'])
     }
   }
   
