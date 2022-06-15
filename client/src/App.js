@@ -103,17 +103,17 @@ function App() {
       </nav>
       <div className="MessageBox">
         {messages.map(({_id, name, message}) => (
-        <div key={_id} className={`message-container ${name === localStorage.name ? "primary" : ""}`}>
-          <div className="message-profile">
-            {name?.length ? name[0] : "?"}
+          <div key={_id} className={`message-container ${name === localStorage.name ? "primary" : ""}`}>
+            <div className="message-profile">
+              {name?.length ? name[0] : "?"}
+            </div>
+            <div className="message-bubble">
+              <strong>{name}</strong>
+              <p>{message}</p>
           </div>
-          <div className="message-bubble">
-            <strong>{name}</strong>
-            <p>{message}</p>
         </div>
-      </div>
-      ))}
-      <div ref={messagesEndRef}></div>
+        ))}
+        <div ref={messagesEndRef}></div>
       </div>
       <form onSubmit={sendMessage} className="form" method="post">
         <input onChange={handleMessageChange} placeholder={lang['text']} type="text" value={message} name="message" required/>
