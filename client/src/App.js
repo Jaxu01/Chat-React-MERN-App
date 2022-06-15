@@ -19,7 +19,7 @@ function App() {
 
   function askForName() {
     let sign = window.prompt("Jak masz na imię?")
-    if (sign.localStorage.name>4) {
+    if (sign.length > 4) {
       localStorage.name = sign
       setName(sign)
     }
@@ -90,7 +90,6 @@ function App() {
       <nav>
         <ul className="Menu">
           <li className="item button"><a onClick={setNewName}>Logowanie</a></li>
-          <li className="item button primary"><a href="Zarejestruj Się">Zarejestruj Się</a></li>
         </ul>
       </nav>
       <section className="MessageBox">
