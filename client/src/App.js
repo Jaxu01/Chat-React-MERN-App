@@ -30,7 +30,10 @@ function App() {
 
   function askForName() {
     let sign = window.prompt(lang['your-name'])
-    if (sign.length > 4) {
+    if (!sign) {
+      return
+    }
+    if (sign?.length > 4) {
       localStorage.name = sign
       setName(sign)
     }
