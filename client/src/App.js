@@ -4,6 +4,16 @@ import { useState, useEffect, useRef } from 'react'
 function App() {
   const CDN_URL = 'http://localhost:5000'
 
+  const i18n = {
+    'PL': {
+      'what-is-your-name': 'Jak masz na imię?',
+      'your-name-is-too-short': 'Imię jest zbyt krótkie',
+      'login': 'Logowanie',
+      'send': 'Wyślij'
+    }
+  }
+    const lang = i18n['PL']
+
   const [name, setName] = useState("")
   const [message, setMessage] = useState("")
   const [messages, setMessages] = useState([])
@@ -18,13 +28,13 @@ function App() {
   }
 
   function askForName() {
-    let sign = window.prompt("Jak masz na imię?")
+    let sign = window.prompt(lang['what-is-your-name'])
     if (sign.length > 4) {
       localStorage.name = sign
       setName(sign)
     }
     else {
-      alert("Imię jest zbyt krótkie")
+      alert(lang['your-name-is-too-short'])
     }
   }
   
@@ -57,7 +67,6 @@ function App() {
   useEffect(() => {
     getName()
     getMessages()
-    console.log(messagesEndRef)
     messagesEndRef.current.scrollIntoView()
     return
   }, [messages.length])
@@ -81,7 +90,6 @@ function App() {
     })
     
     setMessage("")
-    getMessages()
   }
   
   
@@ -89,26 +97,26 @@ function App() {
     <div className="App">
       <nav>
         <ul className="Menu">
-          <li className="item button"><a onClick={setNewName}>Logowanie</a></li>
+          <li className="item button"><a onClick={setNewName}>${lang[login]}</a></li>
         </ul>
       </nav>
-      <section className="MessageBox">
+      <div className="MessageBox">
         {messages.map(({_id, name, message}) => (
         <div key={_id} className={`message-container ${name === localStorage.name ? "primary" : ""}`}>
-          <section className="message-profile">
+          <div className="message-profile">
             {name?.length ? name[0] : "?"}
-          </section>
-          <section className="message-bubble">
-            <h1>{name}</h1>
+          </div>
+          <div className="message-bubble">
+            <strong>{name}</strong>
             <p>{message}</p>
-        </section>
+        </div>
       </div>
       ))}
       <div ref={messagesEndRef}></div>
-      </section>
+      </div>
       <form onSubmit={sendMessage} className="form" method="post">
         <input onChange={handleMessageChange} placeholder="Wiadomość..." type="text" value={message} name="message" required/>
-        <button>Wyślij</button>
+        <button>${lang[send]}</button>
       </form>
     </div>
   )

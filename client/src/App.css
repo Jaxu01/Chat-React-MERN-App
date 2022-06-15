@@ -95,7 +95,7 @@ a:hover {
   padding: 8px 12px;
 }
 
-.MainData h2 {
+.MainData strong {
   color: #e4e6eb;
   margin: 0;
   font-size: 20px;
@@ -124,7 +124,7 @@ a:hover {
   border-radius: 100%;
 }
 
-.message-container h1 {
+.message-container strong {
   color: #b0b3b8;
   margin: 0;
   font-size: 15px;
