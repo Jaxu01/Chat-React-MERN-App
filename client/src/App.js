@@ -9,6 +9,7 @@ function App() {
       'your-name': 'Jak masz na imię?',
       'name-too-short': 'Imię jest zbyt krótkie',
       'login': 'Logowanie',
+      'text': 'Wiadomość...',
       'send': 'Wyślij'
     }
   }
@@ -97,7 +98,7 @@ function App() {
     <div className="App">
       <nav>
         <ul className="Menu">
-          <li className="item button"><a onClick={setNewName}>${lang[login]}</a></li>
+          <li className="item button"><a onClick={setNewName}>{lang['login']}</a></li>
         </ul>
       </nav>
       <div className="MessageBox">
@@ -115,8 +116,8 @@ function App() {
       <div ref={messagesEndRef}></div>
       </div>
       <form onSubmit={sendMessage} className="form" method="post">
-        <input onChange={handleMessageChange} placeholder="Wiadomość..." type="text" value={message} name="message" required/>
-        <button>${lang[send]}</button>
+        <input onChange={handleMessageChange} placeholder={lang['text']} type="text" value={message} name="message" required/>
+        <button>{lang['send']}</button>
       </form>
     </div>
   )
