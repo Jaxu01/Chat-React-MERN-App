@@ -106,7 +106,7 @@ function App() {
       </div>
       ))}
       <div ref={messagesEndRef}></div>
-    </section>
+      </section>
       <form onSubmit={sendMessage} className="form" method="post">
         <input onChange={handleMessageChange} placeholder="Wiadomość..." type="text" value={message} name="message" required/>
         <button>Wyślij</button>
