@@ -6,8 +6,8 @@ function App() {
 
   const i18n = {
     'PL': {
-      'what-is-your-name': 'Jak masz na imię?',
-      'your-name-is-too-short': 'Imię jest zbyt krótkie',
+      'your-name': 'Jak masz na imię?',
+      'name-too-short': 'Imię jest zbyt krótkie',
       'login': 'Logowanie',
       'send': 'Wyślij'
     }
@@ -28,13 +28,13 @@ function App() {
   }
 
   function askForName() {
-    let sign = window.prompt(lang['what-is-your-name'])
+    let sign = window.prompt(lang['your-name'])
     if (sign.length > 4) {
       localStorage.name = sign
       setName(sign)
     }
     else {
-      alert(lang['your-name-is-too-short'])
+      alert(lang['-name-too-short'])
     }
   }
   
