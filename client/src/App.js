@@ -1,73 +1,73 @@
-import './App.css';
-import { useState, useEffect, useRef } from 'react';
+import './App.css'
+import { useState, useEffect, useRef } from 'react'
 
 function App() {
-  const CDN_URL = 'http://localhost:5000';
+  const CDN_URL = 'http://localhost:5000'
 
-  const [name, setName] = useState("");
-  const [message, setMessage] = useState("");
-  const [messages, setMessages] = useState([]);
-  const messagesEndRef = useRef(null);
-  // const [month, day, year] = [date.getMonth(), date.getDate(), date.getFullYear()];
-  // const [hour, minutes, seconds] = [date.getHours(), date.getMinutes(), date.getSeconds()];
-  const date = new Date();
-  const jsonDate = date.toJSON();
+  const [name, setName] = useState("")
+  const [message, setMessage] = useState("")
+  const [messages, setMessages] = useState([])
+  const messagesEndRef = useRef(null)
+  // const [month, day, year] = [date.getMonth(), date.getDate(), date.getFullYear()]
+  // const [hour, minutes, seconds] = [date.getHours(), date.getMinutes(), date.getSeconds()]
+  const date = new Date()
+  const jsonDate = date.toJSON()
 
   function setNewName() {
-    askForName();
+    askForName()
   }
 
   function askForName() {
     let sign = window.prompt("Jak masz na imię?")
     if (sign.localStorage.name>4) {
-      localStorage.name = sign;
-      setName(sign);
+      localStorage.name = sign
+      setName(sign)
     }
     else {
-      alert("Imię jest zbyt krótkie");
+      alert("Imię jest zbyt krótkie")
     }
   }
   
   function getName() {
     if (!localStorage.name) {
-      askForName();
+      askForName()
     }
     else {
-      setName(localStorage.name);
+      setName(localStorage.name)
     }
   }
 
   function handleMessageChange(e) {
-    setMessage(e.target.value);
+    setMessage(e.target.value)
   }
   
   async function getMessages() {
-    const response = await fetch(`${CDN_URL}/messages`);
+    const response = await fetch(`${CDN_URL}/messages`)
     
     if (!response.ok) {
-      const message = `An error occurred ${response.statusText}`;
-      window.alert(message);
-      return;
+      const message = `An error occurred ${response.statusText}`
+      window.alert(message)
+      return
     }
     
-    const messages = await response.json();
-    setMessages(messages);
+    const messages = await response.json()
+    setMessages(messages)
   }
   
   useEffect(() => {
-    getName();
-    getMessages();
-    console.log(messagesEndRef);
-    messagesEndRef.current.scrollIntoView();
-    return;
-  }, [messages.length]);
+    getName()
+    getMessages()
+    console.log(messagesEndRef)
+    messagesEndRef.current.scrollIntoView()
+    return
+  }, [messages.length])
   
   
   async function sendMessage(event) {
-    event.preventDefault();
-    event.target.checkValidity();
-    console.log(name, message, date);
-    const newMessage = {name, message, date};
+    event.preventDefault()
+    event.target.checkValidity()
+    console.log(name, message, date)
+    const newMessage = {name, message, date}
     
     await fetch(`${CDN_URL}/action/add`, {
       method: "POST",
@@ -77,11 +77,11 @@ function App() {
       body: JSON.stringify(newMessage),
     })
     .catch(error => {
-      return window.alert(error);
-    });
+      return window.alert(error)
+    })
     
-    setMessage("");
-    getMessages();
+    setMessage("")
+    getMessages()
   }
   
   
@@ -94,14 +94,14 @@ function App() {
         </ul>
       </nav>
       <section className="MessageBox">
-      {messages.map((item) => (
-      <div key={item._id} className={`message-container ${item.name==="Jakub" ? "primary" : ""}`}>
-        <section className="message-profile">
-          {item?.name?.length ?item.name[0]:"?"}
-        </section>
-        <section className="message-bubble">
-          <h1>{item.name}</h1>
-          <p>{item.message}</p>
+        {messages.map(({_id, name, message}) => (
+        <div key={_id} className={`message-container ${name === localStorage.name ? "primary" : ""}`}>
+          <section className="message-profile">
+            {name?.length ? name[0] : "?"}
+          </section>
+          <section className="message-bubble">
+            <h1>{name}</h1>
+            <p>{message}</p>
         </section>
       </div>
       ))}
@@ -115,4 +115,4 @@ function App() {
   )
 }
 
-export default App;
+export default App
