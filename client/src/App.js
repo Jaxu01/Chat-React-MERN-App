@@ -1,5 +1,6 @@
 import './App.css'
 import { useState, useEffect, useRef } from 'react'
+import { Message } from './Message'
 
 function App() {
   const CDN_URL = 'http://localhost:5000'
@@ -19,15 +20,12 @@ function App() {
   const [message, setMessage] = useState("")
   const [messages, setMessages] = useState([])
   const messagesEndRef = useRef(null)
-  // const [month, day, year] = [date.getMonth(), date.getDate(), date.getFullYear()]
-  // const [hour, minutes, seconds] = [date.getHours(), date.getMinutes(), date.getSeconds()]
-  const date = new Date()
-  const jsonDate = date.toJSON()
-
+  
+  
   function setNewName() {
     askForName()
   }
-
+  
   function askForName() {
     let sign = window.prompt(lang['your-name'])
     if (!sign) {
@@ -50,7 +48,7 @@ function App() {
       setName(localStorage.name)
     }
   }
-
+  
   function handleMessageChange(e) {
     setMessage(e.target.value)
   }
@@ -79,8 +77,8 @@ function App() {
   async function sendMessage(event) {
     event.preventDefault()
     event.target.checkValidity()
-    console.log(name, message, date)
-    const newMessage = {name, message, date}
+    console.log(name, message)
+    const newMessage = {name, message, date: new Date().toJSON()}
     
     await fetch(`${CDN_URL}/action/add`, {
       method: "POST",
@@ -94,9 +92,10 @@ function App() {
     })
     
     setMessage("")
+    getMessages()
   }
   
-  
+
   return (
     <div className="App">
       <nav>
@@ -105,16 +104,8 @@ function App() {
         </ul>
       </nav>
       <div className="MessageBox">
-        {messages.map(({_id, name, message}) => (
-          <div key={_id} className={`message-container ${name === localStorage.name ? "primary" : ""}`}>
-            <div className="message-profile">
-              {name?.length ? name[0] : "?"}
-            </div>
-            <div className="message-bubble">
-              <strong>{name}</strong>
-              <p>{message}</p>
-          </div>
-        </div>
+        {messages.map(({_id, name, message, date}) => (
+         <Message key={_id} name={name} message={message} date={date}/>
         ))}
         <div ref={messagesEndRef}></div>
       </div>

@@ -42,6 +42,7 @@ recordRoutes.route("/action/add").post(function (req, response) {
   let myobj = {
     name: req.body.name,
     message: req.body.message,
+    date: req.body.date
   };
   db_connect.collection("Messages").insertOne(myobj, function (err, res) {
     if (err) throw err;
