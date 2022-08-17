@@ -3,8 +3,8 @@ import { useState, useEffect, useRef } from 'react'
 import { Message } from './Message'
 
 function App() {
-  let CDN_URL = 'http://localhost:5000'
-  if (process.env.PRODUCTION_URI) {
+  let CDN_URL = process.env.LOCAL_URI
+  if (process.env.PRODUCTION) {
     CDN_URL = process.env.PRODUCTION_URI
   }
 
