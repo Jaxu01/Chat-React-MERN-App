@@ -1,11 +1,12 @@
 import './App.css'
 import { useState, useEffect, useRef } from 'react'
 import { Message } from './Message'
+import config from './config.json'
 
 function App() {
-  let CDN_URL = process.env.LOCAL_URI
-  if (process.env.PRODUCTION) {
-    CDN_URL = process.env.PRODUCTION_URI
+  let CDN_URL = config.LOCAL_URI
+  if (config.PRODUCTION) {
+    CDN_URL = config.PRODUCTION_URI
   }
 
   const i18n = {

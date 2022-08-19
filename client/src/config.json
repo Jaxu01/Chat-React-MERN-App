@@ -1,0 +1,5 @@
+{
+    "PRODUCTION_URI": "https://warm-retreat-87623.herokuapp.com/",
+    "LOCAL_URI": "http://localhost:5000",
+    "PRODUCTION": true
+}
