@@ -1,5 +1,5 @@
 import './App.css'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import { Message } from './Message'
 import config from './config.json'
 
@@ -30,7 +30,7 @@ function App() {
     askForName()
   }
   
-  function askForName() {
+  const askForName = useCallback(function() {
     let sign = window.prompt(lang['your-name'])
     if (!sign) {
       return
@@ -42,22 +42,22 @@ function App() {
     else {
       alert(lang['name-too-short'])
     }
-  }
+  }, [lang])
   
-  function getName() {
+  const getName = useCallback(function() {
     if (!localStorage.name) {
       askForName()
     }
     else {
       setName(localStorage.name)
     }
-  }
+  }, [askForName])
   
   function handleMessageChange(e) {
     setMessage(e.target.value)
   }
   
-  async function getMessages() {
+  const getMessages = useCallback(async function() {
     const response = await fetch(`${CDN_URL}/messages`)
     
     if (!response.ok) {
@@ -68,20 +68,18 @@ function App() {
     
     const messages = await response.json()
     setMessages(messages)
-  }
+  }, [CDN_URL])
   
   useEffect(() => {
     getName()
     getMessages()
     messagesEndRef.current.scrollIntoView()
-    return
-  }, [messages.length])
+  }, [messages.length, getMessages, getName])
   
   
   async function sendMessage(event) {
     event.preventDefault()
     event.target.checkValidity()
-    console.log(name, message)
     const newMessage = {name, message, date: new Date().toJSON()}
     
     await fetch(`${CDN_URL}/action/add`, {
