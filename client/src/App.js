@@ -96,7 +96,6 @@ function App() {
     setMessage("")
     getMessages()
   }
-  
 
   return (
     <div className="App">
