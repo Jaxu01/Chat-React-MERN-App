@@ -102,7 +102,7 @@ function App() {
     <div className="App">
       <nav>
         <ul className="Menu">
-          <li className="item button"><a onClick={setNewName}>{lang['login']}</a></li>
+          <li className="item button"><button onClick={setNewName}>{lang['login']}</button></li>
         </ul>
       </nav>
       <div className="MessageBox">
