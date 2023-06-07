@@ -8,6 +8,7 @@ function App() {
   if (config.PRODUCTION) {
     CDN_URL = config.PRODUCTION_URI
   }
+  console.log("💨")
 
   const i18n = {
     'PL': {
@@ -74,7 +75,7 @@ function App() {
     getName()
     getMessages()
     messagesEndRef.current.scrollIntoView()
-  }, [messages.length, getMessages, getName])
+  }, [messages.length])
   
   
   async function sendMessage(event) {

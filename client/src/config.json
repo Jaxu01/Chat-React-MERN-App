@@ -1,5 +1,5 @@
 {
-    "PRODUCTION_URI": "",
+    "PRODUCTION_URI": "https://chat-react-mern-app.vercel.app",
     "LOCAL_URI": "http://localhost:5000",
     "PRODUCTION": true
 }
